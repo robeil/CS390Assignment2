@@ -60,6 +60,7 @@ public class HeartRates {
     public LocalDate getBirthDay(String givenAgeInput){
         LocalDate dateOfBirth;
         while(true){
+            System.out.println("Please, enter your birth date in the format(yyyy-mm-dd)-Example 1989-04-14");
             try {
                 dateOfBirth = LocalDate.parse(givenAgeInput, formatter);
                 return dateOfBirth;
@@ -69,8 +70,8 @@ public class HeartRates {
         }
     }
     //calculating the max rate
-    public double calculateMaxRates(int year){
-        this.maxHeartRate = 220 - year;
+    public double calculateMaxRates(){
+        this.maxHeartRate = 220 - calculateAge(LocalDate.parse(dateOfBirth)).getYears();
         return maxHeartRate;
     }
     //calculating the average
@@ -94,6 +95,6 @@ public class HeartRates {
                 +"\nLast Name: " + getLastName()
                 +"\nAge : "+ calculateAge(LocalDate.parse(dateOfBirth)).getYears()
                 +"\nDate of birth : "+ this.getBirthDay(dateOfBirth)
-                +"\nMaximum Heart Rate: "+ maxHeartRate;
+                +"\nMaximum Heart Rate: " + calculateMaxRates();
     }
 }

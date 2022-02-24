@@ -1,7 +1,6 @@
 package CS390Assignment2.Problem2;
 
 import java.time.LocalDate;
-import java.time.Period;
 import java.util.Scanner;
 
 public class Main {
@@ -19,7 +18,7 @@ public class Main {
         //crating heartRates object
         HeartRates hr = new HeartRates(firstName,lastName,givenInput);
         LocalDate birthDay = hr.getBirthDay(givenInput);
-        Period age = hr.calculateAge(birthDay);
+       // Period age = hr.calculateAge(birthDay);
 
         System.out.println(hr.toString());
     }
