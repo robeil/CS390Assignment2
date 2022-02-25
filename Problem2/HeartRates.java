@@ -10,8 +10,6 @@ public class HeartRates {
     private String firstName;
     private String lastName;
     private String dateOfBirth;
-    private double maxHeartRate;
-    private double averageHeartRate;
     private final double REST_HEART_RATE = 70.0;
     private final double LOWER_BOUNDARY_TARGET = 0.5;
     private final double UPPER_BOUNDARY_TARGET = 0.85;
@@ -71,26 +69,28 @@ public class HeartRates {
     }
     //calculating the max rate
     public double calculateMaxRates(){
-        this.maxHeartRate = 220 - calculateAge(LocalDate.parse(dateOfBirth)).getYears();
-        return maxHeartRate;
+        return  220 - calculateAge(LocalDate.parse(dateOfBirth)).getYears();
     }
     //calculating the average
     public double calculateAverageRates(){
-        averageHeartRate = maxHeartRate - REST_HEART_RATE;
-        return averageHeartRate;
+        return calculateMaxRates() - REST_HEART_RATE;
     }
     //calculating lower boundary target
     public double calculateLowerBoundaryTarget(){
-        return (averageHeartRate * LOWER_BOUNDARY_TARGET) + REST_HEART_RATE;
+        return (calculateAverageRates() * LOWER_BOUNDARY_TARGET) + REST_HEART_RATE;
     }
     //calculating upper boundary target
     public double calculateUpperBoundaryTarget(){
-        return (averageHeartRate * UPPER_BOUNDARY_TARGET) + REST_HEART_RATE;
+        return (calculateAverageRates() * UPPER_BOUNDARY_TARGET) + REST_HEART_RATE;
+    }
+    //target hear rate calculator
+    public String targetHeartRateRangCal(){
+        return ("The target Heart Rate Range is between " +calculateLowerBoundaryTarget() + " and "+ calculateUpperBoundaryTarget());
     }
     @Override
     public String toString(){
 
-        return "The Target Heart Rate Range is between "+ calculateLowerBoundaryTarget()+  " and " +calculateUpperBoundaryTarget()
+        return targetHeartRateRangCal()
                 +"\nFirst Name: " + getFirstName()
                 +"\nLast Name: " + getLastName()
                 +"\nAge : "+ calculateAge(LocalDate.parse(dateOfBirth)).getYears()
